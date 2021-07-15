@@ -1,26 +1,27 @@
-import axios from "axios"
+import axios from "axios";
 
-const API_URL = "localhost:4000"
+const API_URL = "http://localhost:4000";
 
-async function getdata() {
+async function getdata(gradeNum, classNum, day, period) {
   try {
-    await axios.post(
+    const result = await axios.post(
       API_URL,
       {
         query: `
       query getPeriodSubject($grade: Int!,$class: Int!,$day: Int!,$period: Int!) {
-        getPeriodSubject(grade: $grade,class: $class,day: $day,period: $period){
+        getPeriodSubject(grade: $grade,classNum: $class,day: $day,period: $period){
           subject
           grade
           class
+          teacher
         }
       }
     `,
         variables: {
-          grade: 2,
-          class: 4,
-          day: 2,
-          period: 2,
+          grade: gradeNum,
+          class: classNum,
+          day,
+          period,
         },
       },
       {
@@ -29,6 +30,7 @@ async function getdata() {
         },
       }
     );
+    return result;
   } catch (error) {
     console.log(error);
   }
