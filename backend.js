@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API_URL = "localhost:4000"
+const API_URL = "http://localhost:4000"
 
 async function getdata() {
   try {
@@ -9,7 +9,7 @@ async function getdata() {
       {
         query: `
       query getPeriodSubject($grade: Int!,$class: Int!,$day: Int!,$period: Int!) {
-        getPeriodSubject(grade: $grade,class: $class,day: $day,period: $period){
+        getPeriodSubject(grade: $grade,classNum: $class,day: $day,period: $period){
           subject
           grade
           class
